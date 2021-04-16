@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <style>
@@ -25,17 +25,216 @@
 
 <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2017</h1>
 <h1 align="middle">Project 4: Cloth Simulator</h1>
-<h2 align="middle">YOUR NAME, CS184-??</h2>
+<h2 align="middle">Austin Nguyen, CS184-abv</h2>
+
+<p>this webpage is linked at https://austinng411.github.io/clothsim/ </p>
 
 <br><br>
 
-<div>
+    <div>
 
-<h2 align="middle">Overview</h2>
-<p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+        <h2 align="middle">Overview</h2>
+        <p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
 
-<h2 align="middle">Part I: Masses and springs</h2>
+        <h2 align="middle">Part 1: Masses and springs</h2>
+
+        <div align="middle">
+            <img src="pin2_wire.png" align="middle" width="400px" />
+            <figcaption align="middle">Figure 1a: <i>pinned2.json</i></figcaption>
+        </div>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="grid1.png" width="300px" />
+                        <figcaption align="middle">Figure 1b-i: without shearing constraints</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="grid2.png" width="300px" />
+                        <figcaption align="middle">Figure 1b-ii: with shearing constraints only</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="grid3.png" width="300px" />
+                        <figcaption align="middle">Figure 1b-iii: all constraints</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 align="middle">Part 2: Simulation via numerical integration</h2>
+
+        <div align="middle">
+            <img src="pin2_wire.png" align="middle" width="400px" />
+            <figcaption align="middle">Figure 2a: density = 15, ks = 5000</figcaption>
+        </div>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="p_k_100.png" width="300px" />
+                        <figcaption align="middle">Figure 2b-i: ks = 100</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="p_k_1000.png" width="300px" />
+                        <figcaption align="middle">Figure 2b-ii: ks = 1000</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="p_k_10000.png" width="300px" />
+                        <figcaption align="middle">Figure 2b-iii: ks = 10000</figcaption>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">
+                        <img src="pin2_100_m.png" width="300px" />
+                        <figcaption align="middle">Figure 2c-i: ks = 100</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="pin2_100000_m.png" width="300px" />
+                        <figcaption align="middle">Figure 2c-ii: ks = 100000</figcaption>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">
+                        <img src="p_dens_1.png" width="300px" />
+                        <figcaption align="middle">Figure 2d-i: density = 1</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="p_dens_10.png" width="300px" />
+                        <figcaption align="middle">Figure 2d-ii: density = 10</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="p_dens_100.png" width="300px" />
+                        <figcaption align="middle">Figure 2d-iii: density = 100</figcaption>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">
+                        <img src="p_damp_0.png" width="300px" />
+                        <figcaption align="middle">Figure 2e-i: damping = 0</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="p_damp_10.png" width="300px" />
+                        <figcaption align="middle">Figure 2e-ii: damping = 0.10</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div align="middle">
+            <img src="pin4_20_2000.png" align="middle" width="400px" />
+            <figcaption align="middle">Figure 2f: damping = 0.20, density = 20, ks = 2000</figcaption>
+        </div>
+
+        <h2 align="middle">Part 3: Handling collisions with other objects</h2>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="sphere500.png" width="300px" />
+                        <figcaption align="middle">Figure 3a-i: ks = 500</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="sphere5000.png" width="300px" />
+                        <figcaption align="middle">Figure 3a-ii: ks = 5000</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="sphere50000.png" width="300px" />
+                        <figcaption align="middle">Figure 3a-iii: ks = 50000</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="plane_wire.png" width="300px" />
+                        <figcaption align="middle">Figure 3b-i: wireframe</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="plane_normal.png" width="300px" />
+                        <figcaption align="middle">Figure 3b-ii: normal shading</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 align="middle">Part 4: Handling self-collisions</h2>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="self1.png" width="300px" />
+                        <figcaption align="middle">Figure 4a-i</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="self2.png" width="300px" />
+                        <figcaption align="middle">Figure 4a-ii</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="self3.png" width="300px" />
+                        <figcaption align="middle">Figure 4a-iii</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="self4.png" width="300px" />
+                        <figcaption align="middle">Figure 4a-iv</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="self_dens10.png" width="300px" />
+                        <figcaption align="middle">Figure 4b-i</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="self_dens50.png" width="300px" />
+                        <figcaption align="middle">Figure 4b-ii</figcaption>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">
+                        <img src="self_dens5_1.png" width="300px" />
+                        <figcaption align="middle">Figure 4c-i</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="self_dens5_2.png" width="300px" />
+                        <figcaption align="middle">Figure 4c-ii</figcaption>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">
+                        <img src="self_k10.png" width="300px" />
+                        <figcaption align="middle">Figure 4d-i</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="self_k1000.png" width="300px" />
+                        <figcaption align="middle">Figure 4d-ii</figcaption>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">
+                        <img src="self_k10000_1.png" width="300px" />
+                        <figcaption align="middle">Figure 4e-i</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="self_k10000_1.png" width="300px" />
+                        <figcaption align="middle">Figure 4e-ii</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 align="middle">Part 5: Shaders</h2>
 
 
-</body>
+    </div></body>
 </html>
