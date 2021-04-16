@@ -38,9 +38,11 @@
 
         <h2 align="middle">Part 1: Masses and springs</h2>
 
-        <p>Each cloth in the simulator is built with a grid of PointMasses. The physics of the PointMass interactions is simulated
-        by connecting points with springs, and the spring forces keep the cloth together and impact its behavior. The vertical and horizontal
-        springs provide structural and bending constraints to the cloth. The diagonal springs provide shearing constraints.</p>
+        <p>
+            Each cloth in the simulator is built with a grid of PointMasses. The physics of the PointMass interactions is simulated
+            by connecting points with springs, and the spring forces keep the cloth together and impact its behavior. The vertical and horizontal
+            springs provide structural and bending constraints to the cloth. The diagonal springs provide shearing constraints.
+        </p>
 
 
         <div align="middle">
@@ -69,33 +71,45 @@
 
         <h2 align="middle">Part 2: Simulation via numerical integration</h2>
 
-        <p>To simulate the motion of the cloth, we need to compute the effect of the forces acting on each point mass, including
-        external forces like gravity, and spring forces from connecting neighbors. This is implemented using Verlet integration to determine
-        the change in position between time steps. The points are also constrained such that the connective springs cannot stretch past
-        10% greater than rest length.</p>
+        <p>
+            To simulate the motion of the cloth, we need to compute the effect of the forces acting on each point mass, including
+            external forces like gravity, and spring forces from connecting neighbors. This is implemented using Verlet integration to determine
+            the change in position between time steps. The points are also constrained such that the connective springs cannot stretch past
+            10% greater than rest length.
+        </p>
 
-        <p>Using the GUI we can edit the parameters of the cloth. By default, damping is 0.20, density is 15 g/cm^2, ks = 5000 N/m, and these 
-        conditions are shown below.</p>
+        <p>
+            Using the GUI we can edit the parameters of the cloth. By default, damping is 0.20, density is 15 g/cm^2, ks = 5000 N/m, and these
+            conditions are shown below.
+        </p>
 
         <div align="middle">
             <img src="pin2_5000.PNG" align="middle" width="400px" />
             <figcaption align="middle">Figure 2a: density = 15, ks = 5000</figcaption>
         </div>
 
-        <p>When the spring constant is small, the connective forces are low, making the cloth fairly "loose", and we observe more wrinkles in
-        the cloth. A higher spring constant makes the cloth more stiff, so there are fewer wrinkles and folds are large. The effects of changing
-        the spring constant are shown in Figures 2b-(i-iii).</p>
+        <p>
+            When the spring constant is small, the connective forces are low, making the cloth fairly "loose", and we observe more wrinkles in
+            the cloth. A higher spring constant makes the cloth more stiff, so there are fewer wrinkles and folds are large. The effects of changing
+            the spring constant are shown in Figures 2b-(i-iii).
+        </p>
 
-        <p>In Figures 2c-(i-ii), the cloth falls from a horizontal position to a vertical position. When the spring constant was small, I 
-        noticed the edges of the cloth curl more easily, and when the spring constant was large, there was less curling.</p>
+        <p>
+            In Figures 2c-(i-ii), the cloth falls from a horizontal position to a vertical position. When the spring constant was small, I
+            noticed the edges of the cloth curl more easily, and when the spring constant was large, there was less curling.
+        </p>
 
-        <p>Changing the density of the cloth affects the mass of the points. Increasing the density causes the effect of gravity to be greater, 
-        so we see the cloth sag more deeply when the density is high, as shown in Figures 2d-(i-iii).</p>
+        <p>
+            Changing the density of the cloth affects the mass of the points. Increasing the density causes the effect of gravity to be greater,
+            so we see the cloth sag more deeply when the density is high, as shown in Figures 2d-(i-iii).
+        </p>
 
-        <p>Figures 2e-(i-ii) show the effects of changing the damping coefficient used for integration. A high damping coefficient caused 
-        points to move more slowly, but they settled to a very stable steady state. With a low damping coefficent, points will move more
-        rapidly, and they become less stable, resulting in more ripples in the cloth. When the damping coefficient was reduced to 0, the points
-        were completely unstable, and the cloth would continuously shake and jitter.</p>
+        <p>
+            Figures 2e-(i-ii) show the effects of changing the damping coefficient used for integration. A high damping coefficient caused
+            points to move more slowly, but they settled to a very stable steady state. With a low damping coefficent, points will move more
+            rapidly, and they become less stable, resulting in more ripples in the cloth. When the damping coefficient was reduced to 0, the points
+            were completely unstable, and the cloth would continuously shake and jitter.
+        </p>
 
         <div align="center">
             <table style="width=100%">
@@ -159,11 +173,15 @@
 
         <h2 align="middle">Part 3: Handling collisions with other objects</h2>
 
-        <p>After implementing object collision, we can make sure the cloth doesn't interesect other objects, and instead rests on top or moves
-        around them. Collision is added for spheres, so that the point mass positions are corrected if they intersect the sphere.</p>
+        <p>
+            After implementing object collision, we can make sure the cloth doesn't interesect other objects, and instead rests on top or moves
+            around them. Collision is added for spheres, so that the point mass positions are corrected if they intersect the sphere.
+        </p>
 
-        <p>With a low spring constant, the cloth acts very loosely and wraps closely around the sphere with many folds. Increasing the spring 
-        constant, the cloth becomes more stiff, there is more space between the cloth and sphere, and there are fewer folds.</p>
+        <p>
+            With a low spring constant, the cloth acts very loosely and wraps closely around the sphere with many folds. Increasing the spring
+            constant, the cloth becomes more stiff, there is more space between the cloth and sphere, and there are fewer folds.
+        </p>
 
         <div align="center">
             <table style="width=100%">
@@ -203,13 +221,17 @@
 
         <h2 align="middle">Part 4: Handling self-collisions</h2>
 
-        <p>The simulator is modified again to fix self-collisions within the cloth. Collision checking is made more efficient by implementing
-        spatial hashing. Small subsets of point masses that are close in proximity are hashed in a map, so we can just check collisions with
-        nearby points of the same hash, instead of checking against every other possible point. Like with object collision, point positions are
-        corrected if the cloth intersects with itself.</p>
+        <p>
+            The simulator is modified again to fix self-collisions within the cloth. Collision checking is made more efficient by implementing
+            spatial hashing. Small subsets of point masses that are close in proximity are hashed in a map, so we can just check collisions with
+            nearby points of the same hash, instead of checking against every other possible point. Like with object collision, point positions are
+            corrected if the cloth intersects with itself.
+        </p>
 
-        <p>After implementing self-collision, the cloth can fold over itself instead of glitching through itself. Eventually it comes to rest
-        after unfolding slightly.</p>
+        <p>
+            After implementing self-collision, the cloth can fold over itself instead of glitching through itself. Eventually it comes to rest
+            after unfolding slightly.
+        </p>
 
         <div align="center">
             <table style="width=100%">
@@ -234,12 +256,16 @@
             </table>
         </div>
 
-        <p>At low densities the cloth tended to unfold itself very readily. Figures 4c-(i-ii) show a fold that was spontaneously straightened out
-        in a low density cloth. At higher densities, all the folds tended to be nearly parallel after coming to rest.</p>
+        <p>
+            At low densities the cloth tended to unfold itself very readily. Figures 4c-(i-ii) show a fold that was spontaneously straightened out
+            in a low density cloth. At higher densities, all the folds tended to be nearly parallel after coming to rest.
+        </p>
 
-        <p>At low spring constants, the folds in the cloth tended to be more sharp, resulting in less empty space between the folds of the cloth 
-        (Figures 4d-(i-ii)). With a high spring constant, folds were rounded, without a distinct crease, so there was a lot of empty space between 
-        overlapping layers of the cloth (Figures 4e-(i-ii)).</p>
+        <p>
+            At low spring constants, the folds in the cloth tended to be more sharp, resulting in less empty space between the folds of the cloth
+            (Figures 4d-(i-ii)). With a high spring constant, folds were rounded, without a distinct crease, so there was a lot of empty space between
+            overlapping layers of the cloth (Figures 4e-(i-ii)).
+        </p>
         <div align="center">
             <table style="width=100%">
                 <tr>
@@ -286,6 +312,143 @@
         </div>
 
         <h2 align="middle">Part 5: Shaders</h2>
+
+        <p>
+            A shader program specializes in systematically changing the appearance of objects in a scene. This combines 2 parts - a vertex shader and a
+            fragment shader. The full shader is applied to every vertex and affects is appearance. First the vertex shader modifies the geometery of the vertex. It will
+            change and output things like the vertex, normal, and tangent of the vertex, and provide these to the fragment shader. Given the modified vertex geometry,
+            the fragment shader will determine the visual properties that are rendered. In this project, I have implemented fragment shaders that can shade the object,
+            change its texture, or simulate different material properties.
+        </p>
+
+        <p>
+            The Blinn-Phong model simulates how objects are shaded by simplifying illumination into 3 components and adding them together. Blinn-Phong approximates the
+            effects of ambient light, diffuse reflection, and specular reflection, then combines them at differnt weights to determine the total illumination of a point.
+            Here I display the components used in the Blinn-Phong shader and the combined overall effect.
+        </p>
+
+        <div align="middle">
+            <img src="phong0.PNG" align="middle" width="400px" />
+            <figcaption align="middle">Figure 5a: Blinn-Phong shader</figcaption>
+        </div>
+
+        <p>
+            The effect of ambient light is very small because my ambient coefficent is only 0.05. The diffuse coefficient is 1.0, and the specular coefficient is
+            0.5. Specular reflection results in the bright highlights reflected at the camera. The ambient light intensity is a vector of ones, and the value of p
+            is 64.
+        </p>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="phong_ambi.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5b-i: ambient light</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="phong_diff.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5b-ii: diffuse reflection</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="phong_spec.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5b-iii: specular reflection</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <p>Here we use the texture shader to apply an image of squirtle squad onto the cloth and sphere.</p>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="tex1.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5c-i: before collision</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="tex2.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5c-ii: after collision</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <p>
+            The following shows the effects of the bump and displacement shaders on <i>texture_3.png</i>. The bump shader is fairly effective at believably
+            altering the appearance, but it is still clearly very smooth. With the displacement shader, the geometry is affected as well, and we can notice
+            the grooves between bricks that more effectively highlights the texture.
+        </p>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="bump1.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5d-i: bump shader, sphere</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="bump2.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5d-i: bump shader, cloth</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div align="middle">
+            <img src="disp1.PNG" align="middle" width="400px" />
+            <figcaption align="middle">Figure 5e: displacement shader, sphere</figcaption>
+        </div>
+
+        <p>
+            Here we examine what happens when we change the coarseness of the mesh. The bump shader performs about the same at low and high resolution. The
+            displacement shader looks great at high resolution, but it does not look so good at low resolution, and at that point the bump shader looks much better.
+        </p>
+
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="bump16.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5f-i: bump, -o 16 -a 16</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="disp16.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5g-i: displacement, -o 16 -a 16</figcaption>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">
+                        <img src="bump128.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5f-i: bump, -o 128 -a 128</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="disp128.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5g-i: displacement, -o 128 -a 128</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <p>Lastly, a mirror shader is implemented which reflects the environment onto the textured surface.</p>
+        <div align="center">
+            <table style="width=100%">
+                <tr>
+                    <td align="middle">
+                        <img src="mirror1.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5h-i: mirror, sphere</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="mirror2.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5h-ii: mirror, cloth</figcaption>
+                    </td>
+                    <td align="middle">
+                        <img src="mirror3.PNG" width="250px" />
+                        <figcaption align="middle">Figure 5h-iii: mirror, after collision </figcaption>
+                        </figcaption></td>
+                </tr>
+            </table>
+        </div>
 
 
     </div></body>
