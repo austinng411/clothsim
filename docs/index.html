@@ -34,7 +34,19 @@
     <div>
 
         <h2 align="middle">Overview</h2>
-        <p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+            
+        <p>In this project I have implemented several components of a physical simulation engine that can model the movement and behavior of cloth. First the 
+        representation for cloth is built, which consists of a grid of points connected by spring linkages. Then the forces acting on points are applied to 
+        simulate the kinematics of the cloth. Once the cloth is able to move, collision is handled, so that the cloth does not intersect with other objects or itself.
+        Finally, several shaders are implemented in this assignment, allowing appearance changes of scene objects, including our newly implemented cloth.</p>
+
+        <p>Major bugs came from not understanding how to use certain data structures in C++, like hashtables, and errors in vector calculations. Specifically, 
+        unordered maps took some time to understand, as well as lots of trial and error. And when implementing collision, I often had issues with computing the 
+        correction vectors, and I had to draw the vectors on paper to figure it out. Fortunately there was lots of support on Piazza and abundant tips and formulas in 
+        the spec to help me get through each task.</p>
+
+        <p>Shader implementation was also tough at the beginning, because I had trouble understanding how to use GLSL. But after several tries my diffuse shader was
+        working, and I was able to apply the lessons from the diffuse shader to help the rest of shader implementations go relatively smoothly.</p>
 
         <h2 align="middle">Part 1: Masses and springs</h2>
 
@@ -342,15 +354,15 @@
             <table style="width=100%">
                 <tr>
                     <td align="middle">
-                        <img src="phong_ambi.PNG" width="250px" />
+                        <img src="phong_ambi.PNG" width="300px" />
                         <figcaption align="middle">Figure 5b-i: ambient light</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="phong_diff.PNG" width="250px" />
+                        <img src="phong_diff.PNG" width="300px" />
                         <figcaption align="middle">Figure 5b-ii: diffuse reflection</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="phong_spec.PNG" width="250px" />
+                        <img src="phong_spec.PNG" width="300px" />
                         <figcaption align="middle">Figure 5b-iii: specular reflection</figcaption>
                     </td>
                 </tr>
@@ -363,11 +375,11 @@
             <table style="width=100%">
                 <tr>
                     <td align="middle">
-                        <img src="tex1.PNG" width="250px" />
+                        <img src="tex1.PNG" width="300px" />
                         <figcaption align="middle">Figure 5c-i: before collision</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="tex2.PNG" width="250px" />
+                        <img src="tex2.PNG" width="300px" />
                         <figcaption align="middle">Figure 5c-ii: after collision</figcaption>
                     </td>
                 </tr>
@@ -384,11 +396,11 @@
             <table style="width=100%">
                 <tr>
                     <td align="middle">
-                        <img src="bump1.PNG" width="250px" />
+                        <img src="bump1.PNG" width="300px" />
                         <figcaption align="middle">Figure 5d-i: bump shader, sphere</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="bump2.PNG" width="250px" />
+                        <img src="bump2.PNG" width="300px" />
                         <figcaption align="middle">Figure 5d-i: bump shader, cloth</figcaption>
                     </td>
                 </tr>
@@ -409,22 +421,22 @@
             <table style="width=100%">
                 <tr>
                     <td align="middle">
-                        <img src="bump16.PNG" width="250px" />
+                        <img src="bump16.PNG" width="300px" />
                         <figcaption align="middle">Figure 5f-i: bump, -o 16 -a 16</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="disp16.PNG" width="250px" />
+                        <img src="disp16.PNG" width="300px" />
                         <figcaption align="middle">Figure 5g-i: displacement, -o 16 -a 16</figcaption>
                     </td>
                 </tr>
                 <tr>
                     <td align="middle">
-                        <img src="bump128.PNG" width="250px" />
-                        <figcaption align="middle">Figure 5f-i: bump, -o 128 -a 128</figcaption>
+                        <img src="bump128.PNG" width="300px" />
+                        <figcaption align="middle">Figure 5f-ii: bump, -o 128 -a 128</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="disp128.PNG" width="250px" />
-                        <figcaption align="middle">Figure 5g-i: displacement, -o 128 -a 128</figcaption>
+                        <img src="disp128.PNG" width="300px" />
+                        <figcaption align="middle">Figure 5g-ii: displacement, -o 128 -a 128</figcaption>
                     </td>
                 </tr>
             </table>
@@ -435,15 +447,15 @@
             <table style="width=100%">
                 <tr>
                     <td align="middle">
-                        <img src="mirror1.PNG" width="250px" />
+                        <img src="mirror1.PNG" width="300px" />
                         <figcaption align="middle">Figure 5h-i: mirror, sphere</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="mirror2.PNG" width="250px" />
+                        <img src="mirror2.PNG" width="300px" />
                         <figcaption align="middle">Figure 5h-ii: mirror, cloth</figcaption>
                     </td>
                     <td align="middle">
-                        <img src="mirror3.PNG" width="250px" />
+                        <img src="mirror3.PNG" width="300px" />
                         <figcaption align="middle">Figure 5h-iii: mirror, after collision </figcaption>
                         </figcaption></td>
                 </tr>
