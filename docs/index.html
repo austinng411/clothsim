@@ -38,7 +38,7 @@
 
         <h2 align="middle">Part 1: Masses and springs</h2>
 
-        <p>Each cloth in our simulator is built with a grid of PointMasses. The physics of the PointMass interactions is simulated
+        <p>Each cloth in the simulator is built with a grid of PointMasses. The physics of the PointMass interactions is simulated
         by connecting points with springs, and the spring forces keep the cloth together and impact its behavior. The vertical and horizontal
         springs provide structural and bending constraints to the cloth. The diagonal springs provide shearing constraints.</p>
 
@@ -89,13 +89,13 @@
         <p>In Figures 2c-(i-ii), the cloth falls from a horizontal position to a vertical position. When the spring constant was small, I 
         noticed the edges of the cloth curl more easily, and when the spring constant was large, there was less curling.</p>
 
-        <p>Changing the density of the cloth affects the mass of the points. Increasing the density causes the affect of gravity to be greater, 
+        <p>Changing the density of the cloth affects the mass of the points. Increasing the density causes the effect of gravity to be greater, 
         so we see the cloth sag more deeply when the density is high, as shown in Figures 2d-(i-iii).</p>
 
         <p>Figures 2e-(i-ii) show the effects of changing the damping coefficient used for integration. A high damping coefficient caused 
         points to move more slowly, but they settled to a very stable steady state. With a low damping coefficent, points will move more
         rapidly, and they become less stable, resulting in more ripples in the cloth. When the damping coefficient was reduced to 0, the points
-        were completely unstable, and the cloth was continuously shake and jitter.</p>
+        were completely unstable, and the cloth would continuously shake and jitter.</p>
 
         <div align="center">
             <table style="width=100%">
@@ -216,19 +216,19 @@
                 <tr>
                     <td align="middle">
                         <img src="self1.PNG" width="250px" />
-                        <figcaption align="middle">Figure 4a-i</figcaption>
+                        <figcaption align="middle">Figure 4a-i: early falling</figcaption>
                     </td>
                     <td align="middle">
                         <img src="self2.PNG" width="250px" />
-                        <figcaption align="middle">Figure 4a-ii</figcaption>
+                        <figcaption align="middle">Figure 4a-ii: early falling</figcaption>
                     </td>
                     <td align="middle">
                         <img src="self3.PNG" width="250px" />
-                        <figcaption align="middle">Figure 4a-iii</figcaption>
+                        <figcaption align="middle">Figure 4a-iii: after falling</figcaption>
                     </td>
                     <td align="middle">
                         <img src="self4.PNG" width="250px" />
-                        <figcaption align="middle">Figure 4a-iv</figcaption>
+                        <figcaption align="middle">Figure 4a-iv: steady state</figcaption>
                     </td>
                 </tr>
             </table>
