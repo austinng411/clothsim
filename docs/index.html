@@ -38,9 +38,14 @@
 
         <h2 align="middle">Part 1: Masses and springs</h2>
 
+        <p>Each cloth in our simulator is built with a grid of PointMasses. The physics of the PointMass interactions is simulated
+        by connecting points with springs, and the spring forces keep the cloth together and impact its behavior. The vertical and horizontal
+        springs provide structural and bending constraints to the cloth. The diagonal springs provide shearing constraints.</p>
+
+
         <div align="middle">
-            <img src="pin2_wire.PNG" align="middle" width="400px" />
-            <figcaption align="middle">Figure 1a: <i>pinned2.json</i></figcaption>
+            <img src="close.PNG" align="middle" width="400px" />
+            <figcaption align="middle">Figure 1a: <i>pinned2.json</i> close up</figcaption>
         </div>
 
         <div align="center">
@@ -64,10 +69,33 @@
 
         <h2 align="middle">Part 2: Simulation via numerical integration</h2>
 
+        <p>To simulate the motion of the cloth, we need to compute the effect of the forces acting on each point mass, including
+        external forces like gravity, and spring forces from connecting neighbors. This is implemented using Verlet integration to determine
+        the change in position between time steps. The points are also constrained such that the connective springs cannot stretch past
+        10% greater than rest length.</p>
+
+        <p>Using the GUI we can edit the parameters of the cloth. By default, damping is 0.20, density is 15 g/cm^2, ks = 5000 N/m, and these 
+        conditions are shown below.</p>
+
         <div align="middle">
             <img src="pin2_5000.PNG" align="middle" width="400px" />
             <figcaption align="middle">Figure 2a: density = 15, ks = 5000</figcaption>
         </div>
+
+        <p>When the spring constant is small, the connective forces are low, making the cloth fairly "loose", and we observe more wrinkles in
+        the cloth. A higher spring constant makes the cloth more stiff, so there are fewer wrinkles and folds are large. The effects of changing
+        the spring constant are shown in Figures 2b-(i-iii).</p>
+
+        <p>In Figures 2c-(i-ii), the cloth falls from a horizontal position to a vertical position. When the spring constant was small, I 
+        noticed the edges of the cloth curl more easily, and when the spring constant was large, there was less curling.</p>
+
+        <p>Changing the density of the cloth affects the mass of the points. Increasing the density causes the affect of gravity to be greater, 
+        so we see the cloth sag more deeply when the density is high, as shown in Figures 2d-(i-iii).</p>
+
+        <p>Figures 2e-(i-ii) show the effects of changing the damping coefficient used for integration. A high damping coefficient caused 
+        points to move more slowly, but they settled to a very stable steady state. With a low damping coefficent, points will move more
+        rapidly, and they become less stable, resulting in more ripples in the cloth. When the damping coefficient was reduced to 0, the points
+        were completely unstable, and the cloth was continuously shake and jitter.</p>
 
         <div align="center">
             <table style="width=100%">
@@ -122,12 +150,20 @@
             </table>
         </div>
 
+        <p>The simulation below uses <i>pinned4.json</i> and the default parameters.</p>
+
         <div align="middle">
             <img src="pin4_20_2000.PNG" align="middle" width="400px" />
             <figcaption align="middle">Figure 2f: damping = 0.20, density = 20, ks = 2000</figcaption>
         </div>
 
         <h2 align="middle">Part 3: Handling collisions with other objects</h2>
+
+        <p>After implementing object collision, we can make sure the cloth doesn't interesect other objects, and instead rests on top or moves
+        around them. Collision is added for spheres, so that the point mass positions are corrected if they intersect the sphere.</p>
+
+        <p>With a low spring constant, the cloth acts very loosely and wraps closely around the sphere with many folds. Increasing the spring 
+        constant, the cloth becomes more stiff, there is more space between the cloth and sphere, and there are fewer folds.</p>
 
         <div align="center">
             <table style="width=100%">
@@ -148,6 +184,8 @@
             </table>
         </div>
 
+        <p>Collision is implemented for planes as well.</p>
+
         <div align="center">
             <table style="width=100%">
                 <tr>
@@ -164,6 +202,14 @@
         </div>
 
         <h2 align="middle">Part 4: Handling self-collisions</h2>
+
+        <p>The simulator is modified again to fix self-collisions within the cloth. Collision checking is made more efficient by implementing
+        spatial hashing. Small subsets of point masses that are close in proximity are hashed in a map, so we can just check collisions with
+        nearby points of the same hash, instead of checking against every other possible point. Like with object collision, point positions are
+        corrected if the cloth intersects with itself.</p>
+
+        <p>After implementing self-collision, the cloth can fold over itself instead of glitching through itself. Eventually it comes to rest
+        after unfolding slightly.</p>
 
         <div align="center">
             <table style="width=100%">
@@ -188,6 +234,12 @@
             </table>
         </div>
 
+        <p>At low densities the cloth tended to unfold itself very readily. Figures 4c-(i-ii) show a fold that was spontaneously straightened out
+        in a low density cloth. At higher densities, all the folds tended to be nearly parallel after coming to rest.</p>
+
+        <p>At low spring constants, the folds in the cloth tended to be more sharp, resulting in less empty space between the folds of the cloth 
+        (Figures 4d-(i-ii)). With a high spring constant, folds were rounded, without a distinct crease, so there was a lot of empty space between 
+        overlapping layers of the cloth (Figures 4e-(i-ii)).</p>
         <div align="center">
             <table style="width=100%">
                 <tr>
